@@ -66,38 +66,6 @@ describe("Login Form", () => {
     expect(confirmPwInput.value).toContain("test#password_opa");
   });
 
-  it("should throw error messages on invalid email", async () => {
-    expect(screen.queryByText(/invalid email/i)).not.toBeInTheDocument();
-
-    await typeIntoInput("email", "invalid email");
-
-    await clickButton();
-
-    expect(screen.getByText(/invalid email/i)).toBeInTheDocument();
-  });
-
-  it("should throw error on invalid password", async () => {
-    await typeIntoInput("email", "valid@email.com");
-    await typeIntoInput("password", "g");
-    await typeIntoInput("confirmPw", "g");
-    await clickButton();
-
-    expect(screen.queryByText(/invalid email/i)).not.toBeInTheDocument();
-    expect(screen.getByText(/invalid password/i)).toBeInTheDocument();
-    expect(
-      screen.queryByText(/passwords don't match/i)
-    ).not.toBeInTheDocument();
-  });
-
-  it("should throw an error if passwords don't match", async () => {
-    await typeIntoInput("email", "valid@email.com");
-    await typeIntoInput("password", "test#password_opa");
-    await typeIntoInput("confirmPw", "test#password_opa2");
-    await clickButton();
-
-    expect(screen.getByText(/passwords don't match/i)).toBeInTheDocument();
-  });
-
   it("should submit the form if input fields are filled correctly", async () => {
     await typeIntoInput("email", "valid@email.com");
     await typeIntoInput("password", "passwords_match");
@@ -109,5 +77,39 @@ describe("Login Form", () => {
     expect(
       screen.queryByText(/passwords don't match'/i)
     ).not.toBeInTheDocument();
+  });
+
+  describe("handling errors", () => {
+    it("should throw error messages on invalid email", async () => {
+      expect(screen.queryByText(/invalid email/i)).not.toBeInTheDocument();
+
+      await typeIntoInput("email", "invalid email");
+
+      await clickButton();
+
+      expect(screen.getByText(/invalid email/i)).toBeInTheDocument();
+    });
+
+    it("should throw error on invalid password", async () => {
+      await typeIntoInput("email", "valid@email.com");
+      await typeIntoInput("password", "g");
+      await typeIntoInput("confirmPw", "g");
+      await clickButton();
+
+      expect(screen.queryByText(/invalid email/i)).not.toBeInTheDocument();
+      expect(screen.getByText(/invalid password/i)).toBeInTheDocument();
+      expect(
+        screen.queryByText(/passwords don't match/i)
+      ).not.toBeInTheDocument();
+    });
+
+    it("should throw an error if passwords don't match", async () => {
+      await typeIntoInput("email", "valid@email.com");
+      await typeIntoInput("password", "test#password_opa");
+      await typeIntoInput("confirmPw", "test#password_opa2");
+      await clickButton();
+
+      expect(screen.getByText(/passwords don't match/i)).toBeInTheDocument();
+    });
   });
 });
