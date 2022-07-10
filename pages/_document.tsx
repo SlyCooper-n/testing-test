@@ -5,7 +5,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
         {/* <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /> */}
@@ -14,7 +13,7 @@ export default function Document() {
         {/* <link rel="apple-touch-icon" href="/apple-icon.png"></link> */}
 
         {/* <link rel="manifest" href="/manifest.json" /> */}
-        <meta name="theme-color" content="#317EFB" />
+        <meta name="theme-color" content="#6419e6" />
 
         <Script
           crossOrigin="anonymous"
