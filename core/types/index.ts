@@ -1,1 +1,2 @@
-export * from "./"
+export * from "./props";
+export * from "./types";

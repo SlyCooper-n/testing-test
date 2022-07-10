@@ -1,31 +1,13 @@
+import { FormContextType } from "@core/types";
 import { createContext, FormEvent, ReactNode, useState } from "react";
 import toast from "react-hot-toast";
 import isEmail from "validator/lib/isEmail";
 
-type FormContextType = {
-  formValues: {
-    email: string;
-    setEmail: (email: string) => void;
-    password: string;
-    setPassword: (password: string) => void;
-    confirmPassword: string;
-    setConfirmPassword: (confirmPassword: string) => void;
-  };
-  invalid: {
-    email: boolean;
-    password: boolean;
-    confirmPw: boolean;
-  };
-  handle: {
-    invalidEmail: (e: FormEvent) => void;
-    invalidPassword: (e: FormEvent) => void;
-    invalidConfirmPw: (e: FormEvent) => void;
-    validation: () => void;
-    submit: (e: FormEvent) => void;
-  };
-};
-
 export const FormContext = createContext({} as FormContextType);
+
+// function reducer() {
+//   return {};
+// }
 
 export const FormContextProvider = ({ children }: { children: ReactNode }) => {
   const [email, setEmail] = useState("");
@@ -34,6 +16,7 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
   const [invalidConfirmPw, setInvalidConfirmPw] = useState(false);
+  // const [invalidInputs, dispatch] = useReducer(reducer, {});
 
   function handleInvalidEmail(e: FormEvent) {
     e.preventDefault();

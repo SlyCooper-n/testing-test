@@ -1,9 +1,4 @@
-interface InputBoxWithLabelProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  labelFor: string;
-  invalidValue: boolean;
-}
+import { InputBoxWithLabelProps } from "@core/types/props";
 
 export const InputBoxWithLabel = ({
   label,

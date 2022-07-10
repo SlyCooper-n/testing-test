@@ -1,6 +1,4 @@
-interface LittleAlertProps {
-  message: string;
-}
+import { LittleAlertProps } from "@core/types/props";
 
 export const LittleAlert = ({ message }: LittleAlertProps) => {
   return (
