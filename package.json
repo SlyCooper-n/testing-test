@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "vitest run --config vite.config.ts",
+    "test:watch": "vitest --config vite.config.ts"
   },
   "dependencies": {
     "@types/validator": "^13.7.4",

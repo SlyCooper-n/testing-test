@@ -3,9 +3,11 @@ import userEvent from "@testing-library/user-event";
 import { LoginForm } from "./LoginForm";
 
 describe("Login Form", () => {
-  it("should initially render empty inputs", () => {
+  beforeEach(() => {
     render(<LoginForm />);
+  });
 
+  it("should initially render empty inputs", () => {
     const emailInput = screen.getByRole<HTMLInputElement>("textbox");
     const passwordInput = screen.getByLabelText<HTMLInputElement>("Password");
     const confirmPwInput =
@@ -17,8 +19,6 @@ describe("Login Form", () => {
   });
 
   it("should match both the typed and rendered values", async () => {
-    render(<LoginForm />);
-
     const emailInput = screen.getByRole<HTMLInputElement>("textbox");
     const passwordInput = screen.getByLabelText<HTMLInputElement>("Password");
     const confirmPwInput =
@@ -34,8 +34,6 @@ describe("Login Form", () => {
   });
 
   it("should throw error messages on invalid email", async () => {
-    render(<LoginForm />);
-
     const emailInput = screen.getByRole<HTMLInputElement>("textbox");
     const submitButton = screen.getByRole<HTMLButtonElement>("button", {
       name: /submit/i,
@@ -50,8 +48,6 @@ describe("Login Form", () => {
   });
 
   it("should throw error on invalid password", async () => {
-    const { debug } = render(<LoginForm />);
-
     const emailInput = screen.getByRole<HTMLInputElement>("textbox");
     const passwordInput = screen.getByLabelText<HTMLInputElement>("Password");
     const confirmPwInput =
@@ -65,15 +61,14 @@ describe("Login Form", () => {
     await userEvent.type(confirmPwInput, "g");
     await userEvent.click(submitButton);
 
-    debug();
-
     expect(screen.queryByText(/invalid email/i)).not.toBeInTheDocument();
     expect(screen.getByText(/invalid password/i)).toBeInTheDocument();
+    expect(
+      screen.queryByText(/passwords don't match/i)
+    ).not.toBeInTheDocument();
   });
 
   it("should throw an error if passwords don't match", async () => {
-    render(<LoginForm />);
-
     const emailInput = screen.getByRole<HTMLInputElement>("textbox");
     const passwordInput = screen.getByLabelText<HTMLInputElement>("Password");
     const confirmPwInput =
@@ -91,8 +86,6 @@ describe("Login Form", () => {
   });
 
   it("should submit the form if input fields are filled correctly", async () => {
-    render(<LoginForm />);
-
     const emailInput = screen.getByRole<HTMLInputElement>("textbox");
     const passwordInput = screen.getByLabelText<HTMLInputElement>("Password");
     const confirmPwInput =
@@ -106,6 +99,10 @@ describe("Login Form", () => {
     await userEvent.type(confirmPwInput, "passwords_match");
     await userEvent.click(submitButton);
 
-    expect(await screen.findByText(/logged in/i)).toBeInTheDocument();
+    expect(screen.queryByText(/invalid email/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/invalid password/i)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/passwords don't match'/i)
+    ).not.toBeInTheDocument();
   });
 });
