@@ -1,5 +1,5 @@
-import { useFormLogin } from "../../../core/hooks";
-import { InputBoxWithLabel, LittleAlert } from "../../widgets/";
+import { InputBoxWithLabel, LittleAlert } from "@components/widgets";
+import { useFormLogin } from "@core/hooks";
 
 export const LoginForm = () => {
   const { formValues, invalid, handle } = useFormLogin();
