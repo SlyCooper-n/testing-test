@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run --config vitest.config.ts",
-    "test:watch": "vitest --config vitest.config.ts"
+    "test:watch": "vitest --config vitest.config.ts",
+    "test:ui": "vitest --ui --config vitest.config.ts"
   },
   "dependencies": {
     "@types/validator": "^13.7.4",
@@ -29,6 +30,7 @@
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
     "@vitejs/plugin-react": "^1.3.2",
+    "@vitest/ui": "^0.18.0",
     "autoprefixer": "^10.4.7",
     "c8": "^7.11.3",
     "eslint": "8.19.0",
