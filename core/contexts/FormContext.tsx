@@ -1,4 +1,5 @@
 import { FormContextType } from "@core/types";
+import { useRouter } from "next/router";
 import { createContext, FormEvent, ReactNode, useState } from "react";
 import toast from "react-hot-toast";
 import isEmail from "validator/lib/isEmail";
@@ -16,6 +17,7 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
   const [invalidConfirmPw, setInvalidConfirmPw] = useState(false);
+  const router = useRouter();
   // const [invalidInputs, dispatch] = useReducer(reducer, {});
 
   function handleInvalidEmail(e: FormEvent) {
@@ -72,6 +74,8 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
     setConfirmPassword("");
 
     toast.success("Email sent successfully");
+
+    router.push("/home");
   }
 
   return (
