@@ -3,7 +3,7 @@ import { FormContextProvider } from "@core/contexts";
 import type { NextPage } from "next";
 import { Toaster } from "react-hot-toast";
 
-const Home: NextPage = () => {
+const Login: NextPage = () => {
   return (
     <div className="w-screen min-h-screen flex justify-center items-center">
       <Toaster />
@@ -15,4 +15,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Login;
