@@ -1,12 +1,5 @@
+import { HabitListItemProps } from "@core/types";
 import { Check, Trash, X } from "phosphor-react";
-import { FormEvent } from "react";
-import { HabitItemType } from "../HabitChecklist";
-
-interface HabitListItemProps {
-  habit: HabitItemType;
-  onItemClick: (id: string) => void;
-  onDelete: (e: FormEvent, id: string) => void;
-}
 
 export const HabitListItem = ({
   habit,

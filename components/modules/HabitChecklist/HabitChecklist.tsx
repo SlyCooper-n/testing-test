@@ -1,12 +1,7 @@
+import { HabitItemType } from "@core/types";
 import { nanoid } from "nanoid";
 import { FormEvent, useEffect, useState } from "react";
 import { HabitListItem } from "./components/HabitListItem";
-
-export type HabitItemType = {
-  id: string;
-  text: string;
-  checked: boolean;
-};
 
 export const HabitChecklist = () => {
   const [habitChecklist, setHabitChecklist] = useState<HabitItemType[]>([]);
