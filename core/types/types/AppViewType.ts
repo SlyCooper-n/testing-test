@@ -1,1 +1,1 @@
-export type AppViewType = "habbit-checklist" | "accomplishments";
+export type AppViewType = "habit-checklist" | "accomplishments";
