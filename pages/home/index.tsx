@@ -1,3 +1,4 @@
+import { HabitChecklist } from "@components/modules/";
 import { AvatarPopover } from "@components/widgets/";
 import { AppViewType } from "@core/types";
 import { NextPage } from "next";
@@ -50,7 +51,7 @@ const Home: NextPage = () => {
         </ul>
       </nav>
 
-      <div className="w-full max-w-7xl mx-auto">
+      <div className="flex-1 w-full max-w-7xl mx-auto flex flex-col">
         <header className="navbar py-4 flex justify-between bg-base-300 rounded-br-md rounded-bl-md">
           <button
             type="button"
@@ -98,7 +99,7 @@ const Home: NextPage = () => {
         </header>
 
         <main className="flex-1">
-          {appView === "habbit-checklist" && <div>Habbit</div>}
+          {appView === "habbit-checklist" && <HabitChecklist />}
 
           {appView === "accomplishments" && <div>Accomplishments</div>}
         </main>
