@@ -68,6 +68,7 @@ export const HabitChecklist = () => {
       <form className="w-full mb-8 px-4 sm:px-0 flex" onSubmit={addNewHabit}>
         <input
           type="text"
+          autoFocus
           aria-label="Insert your habbit here"
           placeholder="Insert your habbit here"
           value={newHabit}

@@ -82,6 +82,7 @@ export const Accomplishments = () => {
         <input
           type="text"
           name="title"
+          autoFocus
           aria-label="Title"
           placeholder="Title"
           required
