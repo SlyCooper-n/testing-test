@@ -2,14 +2,7 @@
 
 import { login } from "./login.cy";
 
-export {};
-
 describe("Homepage", () => {
-  // beforeEach(() => {
-  //   cy.visit("/");
-  //   login();
-  // });
-
   it("should render app view correctly", () => {
     cy.visit("/");
     login();
@@ -62,7 +55,7 @@ describe("Homepage", () => {
 
       cy.get("input.input").should("have.value", "");
       cy.get(".h-32").should("have.value", "");
-      cy.get(".label-text").should("not.be.checked");
+      cy.get(".checkbox").should("be.checked");
     });
   });
 });
