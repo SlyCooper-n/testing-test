@@ -71,7 +71,7 @@ const Home: NextPage = () => {
 
           <ul className="hidden sm:flex menu menu-horizontal p-0 gap-1">
             <li>
-              <a
+              <button
                 type="button"
                 onClick={() => setAppView("habbit-checklist")}
                 className={`btn btn-ghost ${
@@ -79,7 +79,7 @@ const Home: NextPage = () => {
                 }`}
               >
                 Habbit Checklist
-              </a>
+              </button>
             </li>
 
             <li>
