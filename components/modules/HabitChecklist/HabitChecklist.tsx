@@ -25,7 +25,7 @@ export const HabitChecklist = () => {
       {
         id: nanoid(),
         text: newHabit,
-        checked: true,
+        checked: false,
       },
     ]);
     setNewHabit("");
@@ -37,7 +37,7 @@ export const HabitChecklist = () => {
         {
           id: nanoid(),
           text: newHabit,
-          checked: true,
+          checked: false,
         },
       ])
     );
@@ -63,7 +63,7 @@ export const HabitChecklist = () => {
 
   return (
     <div className="w-full sm:w-1/2 h-full mx-auto pt-12 flex flex-col items-center">
-      <h2 className="mb-12 text-3xl font-semibold">Habbit Checklist</h2>
+      <h2 className="mb-12 text-3xl font-semibold">Habit Checklist</h2>
 
       <form className="w-full mb-8 px-4 sm:px-0 flex" onSubmit={addNewHabit}>
         <input
