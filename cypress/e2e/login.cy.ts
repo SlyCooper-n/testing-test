@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+export {};
 
 describe("Login", () => {
   it("should login", () => {
