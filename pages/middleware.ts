@@ -7,7 +7,6 @@ export const middleware = (request: NextRequest) => {
   }
 };
 
-// See "Matching Paths" below to learn more
-export const config = {
-  matcher: "/home",
-};
+// export const config = {
+//   matcher: "/home",
+// };
