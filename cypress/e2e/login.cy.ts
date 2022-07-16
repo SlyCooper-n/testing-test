@@ -1,13 +1,16 @@
 /// <reference types="cypress" />
-export {};
+
+export function login() {
+  cy.visit("/");
+  cy.get("#email").type("valid@email.com");
+  cy.get("#password").type("password");
+  cy.get("#confirm-pw").type("password");
+  cy.get(".btn").click();
+}
 
 describe("Login", () => {
   it("should login", () => {
-    cy.visit("/");
-    cy.get("#email").type("valid@email.com");
-    cy.get("#password").type("password");
-    cy.get("#confirm-pw").type("password");
-    cy.get(".btn").click();
+    login();
 
     cy.url().should("include", "/home");
   });
