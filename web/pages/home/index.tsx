@@ -1,5 +1,5 @@
 import { PageContainer } from "@components/layouts";
-import { Accomplishments, HabitChecklist } from "@components/modules/";
+import { Accomplishments, HabitChecklist, Rewards } from "@components/modules/";
 import { AvatarPopover } from "@components/widgets/";
 import { AppViewType } from "@core/types";
 import { NextPage } from "next";
@@ -21,7 +21,11 @@ const Home: NextPage = () => {
   return (
     <PageContainer
       headTitle={`TestingTest | ${
-        appView === "habit-checklist" ? "Habit Checklist" : "Accomplishments"
+        appView === "habit-checklist"
+          ? "Habit Checklist"
+          : appView === "accomplishments"
+          ? "Accomplishments"
+          : "Rewards"
       }`}
     >
       <nav
@@ -51,6 +55,18 @@ const Home: NextPage = () => {
               } btn btn-ghost`}
             >
               Accomplishments
+            </button>
+          </li>
+
+          <li>
+            <button
+              type="button"
+              onClick={chooseAppView("rewards")}
+              className={`${
+                appView === "rewards" ? "text-accent" : ""
+              } btn btn-ghost`}
+            >
+              Rewards
             </button>
           </li>
         </ul>
@@ -98,6 +114,18 @@ const Home: NextPage = () => {
                 Accomplishments
               </button>
             </li>
+
+            <li>
+              <button
+                type="button"
+                onClick={() => setAppView("rewards")}
+                className={`btn btn-ghost ${
+                  appView === "rewards" ? "text-accent" : ""
+                }`}
+              >
+                Rewards
+              </button>
+            </li>
           </ul>
 
           <AvatarPopover />
@@ -107,6 +135,8 @@ const Home: NextPage = () => {
           {appView === "habit-checklist" && <HabitChecklist />}
 
           {appView === "accomplishments" && <Accomplishments />}
+
+          {appView === "rewards" && <Rewards />}
         </main>
       </div>
     </PageContainer>
