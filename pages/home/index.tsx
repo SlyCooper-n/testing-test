@@ -1,3 +1,4 @@
+import { PageContainer } from "@components/layouts";
 import { Accomplishments, HabitChecklist } from "@components/modules/";
 import { AvatarPopover } from "@components/widgets/";
 import { AppViewType } from "@core/types";
@@ -8,7 +9,7 @@ import { useState } from "react";
 
 const Home: NextPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [appView, setAppView] = useState<AppViewType>("habbit-checklist");
+  const [appView, setAppView] = useState<AppViewType>("habit-checklist");
 
   function chooseAppView(appView: AppViewType) {
     return () => {
@@ -18,7 +19,11 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="w-screen min-h-screen flex flex-col">
+    <PageContainer
+      headTitle={`TestingTest | ${
+        appView === "habit-checklist" ? "Habit Checklist" : "Accomplishments"
+      }`}
+    >
       <nav
         className={`absolute sm:hidden top-[82px] h-screen p-4 bg-base-200 ${
           menuOpen ? "left-0" : "-left-full"
@@ -28,9 +33,9 @@ const Home: NextPage = () => {
           <li>
             <button
               type="button"
-              onClick={chooseAppView("habbit-checklist")}
+              onClick={chooseAppView("habit-checklist")}
               className={`${
-                appView === "habbit-checklist" ? "text-accent" : ""
+                appView === "habit-checklist" ? "text-accent" : ""
               } btn btn-ghost`}
             >
               Habbit Checklist
@@ -73,9 +78,9 @@ const Home: NextPage = () => {
             <li>
               <button
                 type="button"
-                onClick={() => setAppView("habbit-checklist")}
+                onClick={() => setAppView("habit-checklist")}
                 className={`btn btn-ghost ${
-                  appView === "habbit-checklist" ? "text-accent" : null
+                  appView === "habit-checklist" ? "text-accent" : null
                 }`}
               >
                 Habbit Checklist
@@ -99,12 +104,12 @@ const Home: NextPage = () => {
         </header>
 
         <main className="flex-1">
-          {appView === "habbit-checklist" && <HabitChecklist />}
+          {appView === "habit-checklist" && <HabitChecklist />}
 
           {appView === "accomplishments" && <Accomplishments />}
         </main>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 
