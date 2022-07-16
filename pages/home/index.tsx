@@ -1,4 +1,4 @@
-import { HabitChecklist } from "@components/modules/";
+import { Accomplishments, HabitChecklist } from "@components/modules/";
 import { AvatarPopover } from "@components/widgets/";
 import { AppViewType } from "@core/types";
 import { NextPage } from "next";
@@ -101,7 +101,7 @@ const Home: NextPage = () => {
         <main className="flex-1">
           {appView === "habbit-checklist" && <HabitChecklist />}
 
-          {appView === "accomplishments" && <div>Accomplishments</div>}
+          {appView === "accomplishments" && <Accomplishments />}
         </main>
       </div>
     </div>
