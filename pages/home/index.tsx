@@ -1,17 +1,66 @@
+import { AvatarPopover } from "@components/widgets/";
 import { AppViewType } from "@core/types";
 import { NextPage } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import { List } from "phosphor-react";
 import { useState } from "react";
 
 const Home: NextPage = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [appView, setAppView] = useState<AppViewType>("habbit-checklist");
+
+  function chooseAppView(appView: AppViewType) {
+    return () => {
+      setAppView(appView);
+      setMenuOpen(false);
+    };
+  }
 
   return (
     <div className="w-screen min-h-screen flex flex-col">
+      <nav
+        className={`absolute sm:hidden top-[82px] h-screen p-4 bg-base-200 ${
+          menuOpen ? "left-0" : "-left-full"
+        } transition-all`}
+      >
+        <ul className="menu menu-vertical gap-1">
+          <li>
+            <button
+              type="button"
+              onClick={chooseAppView("habbit-checklist")}
+              className={`${
+                appView === "habbit-checklist" ? "text-accent" : ""
+              } btn btn-ghost`}
+            >
+              Habbit Checklist
+            </button>
+          </li>
+
+          <li>
+            <button
+              type="button"
+              onClick={chooseAppView("accomplishments")}
+              className={`${
+                appView === "accomplishments" ? "text-accent" : ""
+              } btn btn-ghost`}
+            >
+              Accomplishments
+            </button>
+          </li>
+        </ul>
+      </nav>
+
       <div className="w-full max-w-7xl mx-auto">
-        <nav className="navbar py-4 flex justify-between bg-base-300">
-          <h1 className="btn btn-ghost normal-case text-2xl font-semibold">
+        <header className="navbar py-4 flex justify-between bg-base-300 rounded-br-md rounded-bl-md">
+          <button
+            type="button"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="btn btn-ghost sm:hidden"
+          >
+            <List size={24} weight="bold" />
+          </button>
+
+          <h1 className="btn btn-ghost mr-auto sm:mr-0 normal-case text-2xl font-semibold">
             <Link href="/home">
               <a>
                 <span className="text-primary">Testing</span>Test
@@ -19,43 +68,34 @@ const Home: NextPage = () => {
             </Link>
           </h1>
 
-          <ul className="menu menu-horizontal p-0">
+          <ul className="hidden sm:flex menu menu-horizontal p-0 gap-1">
             <li>
-              <button
+              <a
                 type="button"
                 onClick={() => setAppView("habbit-checklist")}
-                className={`${
-                  appView === "habbit-checklist" ? "text-accent" : ""
-                } btn btn-ghost`}
+                className={`btn btn-ghost ${
+                  appView === "habbit-checklist" ? "text-accent" : null
+                }`}
               >
                 Habbit Checklist
-              </button>
+              </a>
             </li>
 
             <li>
               <button
                 type="button"
                 onClick={() => setAppView("accomplishments")}
-                className={`${
-                  appView === "accomplishments" ? "text-accent" : ""
-                } btn btn-ghost`}
+                className={`btn btn-ghost ${
+                  appView === "accomplishments" ? "text-accent" : null
+                }`}
               >
                 Accomplishments
               </button>
             </li>
           </ul>
 
-          <div className="avatar mr-4">
-            <div className="rounded-full">
-              <Image
-                src="https://placeimg.com/50/50/people"
-                alt="random avatar image"
-                width={50}
-                height={50}
-              />
-            </div>
-          </div>
-        </nav>
+          <AvatarPopover />
+        </header>
 
         <main className="flex-1">
           {appView === "habbit-checklist" && <div>Habbit</div>}
