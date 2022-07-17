@@ -13,6 +13,10 @@ app
     return res.status(200).json(rewardsData);
   })
   .post((req, res) => {
+    if (req.body.title.includes("bad") || req.body.body.includes("bad")) {
+      return res.status(406).json({ msg: "Your content is not appropriate" });
+    }
+
     rewardsData.push({
       id: rewardsData.length + 1,
       title: req.body.title,
