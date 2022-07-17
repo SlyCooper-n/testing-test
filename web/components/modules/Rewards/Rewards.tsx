@@ -10,7 +10,11 @@ export const Rewards = () => {
     return <div>failed to load</div>;
   }
   if (!rewards)
-    return <CircleNotch size={64} className="mt-4 text-info animate-spin" />;
+    return (
+      <div className="flex justify-center items-center">
+        <CircleNotch size={64} className="mt-4 text-info animate-spin" />
+      </div>
+    );
 
   return (
     <section className="pt-12 flex flex-col items-center gap-12">
