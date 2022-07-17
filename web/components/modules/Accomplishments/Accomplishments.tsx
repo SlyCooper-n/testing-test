@@ -1,3 +1,4 @@
+import { api } from "@core/services";
 import { AccomplishmentType } from "@core/types";
 import { Cake, CircleNotch } from "phosphor-react";
 import { FormEvent, useState } from "react";
@@ -9,7 +10,7 @@ export const Accomplishments = () => {
     valid: true,
   });
   const [formSent, setFormSent] = useState(false);
-  const [fakeLoading, setFakeLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function handleFormChange(
     e: FormEvent<HTMLInputElement> | FormEvent<HTMLTextAreaElement>
@@ -38,20 +39,27 @@ export const Accomplishments = () => {
     }
   }
 
-  function handleFormSubmit(e: FormEvent) {
+  async function handleFormSubmit(e: FormEvent) {
     e.preventDefault();
 
-    setFakeLoading(true);
-    setTimeout(() => {
+    if (accomplishment.title.trim() === "" || accomplishment.body.trim() === "")
+      return;
+
+    setLoading(true);
+
+    try {
+      await api.post("/rewards", accomplishment);
       setFormSent(true);
-      setFakeLoading(false);
-    }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
 
     setAccomplishment({
       title: "",
       body: "",
       valid: true,
     });
+    setLoading(false);
   }
 
   if (formSent) {
@@ -78,7 +86,10 @@ export const Accomplishments = () => {
     <section className="w-full sm:w-1/2 h-full mx-auto pt-12 flex flex-col items-center">
       <h2 className="mb-12 text-3xl font-semibold">Accomplishments</h2>
 
-      <form className="form-control w-full gap-4" onSubmit={handleFormSubmit}>
+      <form
+        className="form-control w-full px-4 sm:px-0 gap-4"
+        onSubmit={handleFormSubmit}
+      >
         <input
           type="text"
           name="title"
@@ -112,12 +123,12 @@ export const Accomplishments = () => {
           <span className="label-text">This accomplishment is valid</span>
         </label>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" disabled={loading} className="btn btn-primary">
           Submit Accomplishment
         </button>
       </form>
 
-      {fakeLoading && (
+      {loading && (
         <CircleNotch size={64} className="mt-4 text-info animate-spin" />
       )}
     </section>
