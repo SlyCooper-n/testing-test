@@ -11,6 +11,7 @@ export const Accomplishments = () => {
   });
   const [formSent, setFormSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   function handleFormChange(
     e: FormEvent<HTMLInputElement> | FormEvent<HTMLTextAreaElement>
@@ -50,8 +51,8 @@ export const Accomplishments = () => {
     try {
       await api.post("/rewards", accomplishment);
       setFormSent(true);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setError(error.response.data.msg);
     }
 
     setAccomplishment({
@@ -122,6 +123,8 @@ export const Accomplishments = () => {
           />
           <span className="label-text">This accomplishment is valid</span>
         </label>
+
+        {error && <span className="text-error">{error}</span>}
 
         <button type="submit" disabled={loading} className="btn btn-primary">
           Submit Accomplishment
