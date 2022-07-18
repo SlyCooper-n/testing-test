@@ -1,12 +1,6 @@
-import { LottieOptions, useLottie } from "lottie-react";
+import { LikeProps } from "@core/types/";
+import { useLottie } from "lottie-react";
 import { useState } from "react";
-
-interface LikeProps extends LottieOptions {
-  speed?: number;
-  segments?: [number, number];
-  backwards?: boolean;
-  revertOnClick?: boolean;
-}
 
 export const Lottie = ({
   animationData,
@@ -16,7 +10,7 @@ export const Lottie = ({
   segments,
   speed = 1,
   backwards = false,
-  revertOnClick = true,
+  actionOnClick = "revert",
 }: LikeProps) => {
   const [clicked, setClicked] = useState(false);
 
@@ -28,7 +22,7 @@ export const Lottie = ({
       const duration = getDuration(true) as number;
       const [segmentStart, segmentEnd] = segments || [0, duration];
 
-      if (revertOnClick) {
+      if (actionOnClick === "revert") {
         if (!clicked) {
           playSegments(
             backwards ? [segmentEnd, segmentStart] : [segmentStart, segmentEnd],
