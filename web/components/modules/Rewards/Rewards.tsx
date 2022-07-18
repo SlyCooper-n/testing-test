@@ -6,6 +6,7 @@ import useSWR from "swr";
 
 export const Rewards = () => {
   const { data: rewards, error } = useSWR("/api/rewards", fetcher);
+  // const [clicked, setClicked] = useState(false);
 
   if (error) {
     console.log(error);
@@ -39,6 +40,15 @@ export const Rewards = () => {
               animationData={twitterLike}
               speed={1.5}
               className="w-20 hover:cursor-pointer"
+              // customOnClick={({ playSegments }) => {
+              //   if (!clicked) {
+              //     playSegments([0, 71], true);
+              //   }
+              //   if (clicked) {
+              //     playSegments([71, 0], true);
+              //   }
+              //   setClicked((prevClicked) => !prevClicked);
+              // }}
             />
           </li>
         ))}
