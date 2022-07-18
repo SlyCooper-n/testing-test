@@ -1,4 +1,4 @@
-import { LikeProps } from "@core/types/";
+import { LottieProps } from "@core/types/";
 import { useLottie } from "lottie-react";
 import { useState } from "react";
 
@@ -11,14 +11,27 @@ export const Lottie = ({
   speed = 1,
   backwards = false,
   actionOnClick = "revert",
-}: LikeProps) => {
+  customOnClick,
+}: LottieProps) => {
   const [clicked, setClicked] = useState(false);
 
-  const { View, playSegments, setSpeed, getDuration } = useLottie({
+  const lottie = useLottie({
     animationData,
     loop: loop || false,
     autoplay: autoplay || false,
     onClick: () => {
+      // custom onClick function that calls the function gaven in props
+      // and ignores the default
+      if (customOnClick) {
+        customOnClick({
+          ...lottie,
+        });
+        return;
+      }
+
+      // default onClick options => "revert", "stop" etc...
+      const { playSegments, getDuration } = lottie;
+
       const duration = getDuration(true) as number;
       const [segmentStart, segmentEnd] = segments || [0, duration];
 
@@ -43,7 +56,7 @@ export const Lottie = ({
     className,
   });
 
-  setSpeed(speed);
+  lottie.setSpeed(speed);
 
-  return View;
+  return lottie.View;
 };
