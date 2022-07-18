@@ -1,17 +1,22 @@
-/// <reference types="cypress" />
-
-import { login } from "./login.cy";
+export {};
 
 describe("Homepage", () => {
   it("should render app view correctly", () => {
-    cy.visit("/");
-    login();
+    cy.login();
 
     cy.get(".hidden > :nth-child(1) > .btn").click();
     cy.contains("h2", "Habit").should("exist");
 
     cy.get(".hidden > :nth-child(2) > .btn").click();
     cy.contains("h2", "Accomplishments").should("exist");
+  });
+
+  it("should open the user options menu", () => {
+    cy.get('[alt="random avatar image"]').click();
+
+    cy.get(":nth-child(1) > a").should("be.visible");
+    cy.get(":nth-child(2) > a").should("be.visible");
+    cy.get(":nth-child(3) > a").should("be.visible");
   });
 
   describe("Habit Checklist", () => {
@@ -110,10 +115,29 @@ describe("Homepage", () => {
       cy.contains(/your content is not appropriate/i).should("be.visible");
     });
 
+    it("should toggle like", () => {
+      cy.get(".hidden > :nth-child(3) > .btn").click();
+
+      cy.get(":nth-child(1) > .w-20 > svg").click().wait(2000);
+
+      cy.get(":nth-child(1) > .w-20 > svg > g > g").should(
+        "have.attr",
+        "style",
+        "display: none;"
+      );
+
+      cy.get(":nth-child(1) > .w-20 > svg").click().wait(2000);
+
+      cy.get(":nth-child(1) > .w-20 > svg > g > g").should(
+        "have.attr",
+        "style",
+        "display: block;"
+      );
+    });
+
     describe("handling with real server", () => {
       it("should render new accomplishments", () => {
-        cy.visit("/");
-        login();
+        cy.login();
 
         cy.get(".hidden > :nth-child(2) > .btn").click();
 

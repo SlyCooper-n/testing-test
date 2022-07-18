@@ -16,15 +16,13 @@ export {};
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 
-// Cypress.Commands.addAll({
-//   login() {
-//     cy.visit("/");
-//     cy.get("#email").type("valid@email.com");
-//     cy.get("#password").type("password");
-//     cy.get("#confirm-pw").type("password");
-//     cy.get(".btn").click();
-//   },
-// });
+Cypress.Commands.add("login", () => {
+  cy.visit("/");
+  cy.get("#email").type("valid@email.com");
+  cy.get("#password").type("password");
+  cy.get("#confirm-pw").type("password");
+  cy.get(".btn").click();
+});
 
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
