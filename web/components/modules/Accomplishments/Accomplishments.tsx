@@ -49,10 +49,10 @@ export const Accomplishments = () => {
     setLoading(true);
 
     try {
-      await api.post("/rewards", accomplishment);
+      await api.post("/api/rewards", accomplishment);
       setFormSent(true);
     } catch (error: any) {
-      setError(error.response.data.msg);
+      setError(error.response.data.message);
     }
 
     setAccomplishment({
@@ -65,8 +65,8 @@ export const Accomplishments = () => {
 
   if (formSent) {
     return (
-      <section className="w-full sm:w-1/2 h-full mx-auto pt-12 flex flex-col items-center gap-12">
-        <h2 className="text-3xl font-semibold">
+      <section className="w-full sm:w-1/2 h-full mx-auto pt-12 px-4 sm:px-0 flex flex-col items-center gap-12">
+        <h2 className="text-3xl text-center font-semibold">
           Accomplishment sent successfully!
         </h2>
 
