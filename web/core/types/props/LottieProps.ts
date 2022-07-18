@@ -5,5 +5,5 @@ export interface LottieProps extends LottieOptions {
   segments?: [number, number];
   backwards?: boolean;
   actionOnClick?: "revert" | "play-pause" | "stop" | "none";
-  customOnClick?: ({}: LottieRefCurrentProps) => void;
+  customOnClick?: (lottieFunctions: LottieRefCurrentProps) => void;
 }
