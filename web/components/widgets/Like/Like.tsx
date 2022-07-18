@@ -20,31 +20,34 @@ export const Lottie = ({
 }: LikeProps) => {
   const [clicked, setClicked] = useState(false);
 
-  const { View, playSegments, setDirection, setSpeed, getDuration } = useLottie(
-    {
-      animationData,
-      loop: loop || false,
-      autoplay: autoplay || false,
-      onClick: () => {
-        const duration = getDuration(true);
+  const { View, playSegments, setSpeed, getDuration } = useLottie({
+    animationData,
+    loop: loop || false,
+    autoplay: autoplay || false,
+    onClick: () => {
+      const duration = getDuration(true) as number;
+      const [segmentStart, segmentEnd] = segments || [0, duration];
 
-        if (revertOnClick) {
-          if (!clicked) {
-            setDirection(backwards ? -1 : 1);
-            playSegments([0, duration!]);
-          }
-
-          if (clicked) {
-            setDirection(backwards ? 1 : -1);
-            playSegments([duration!, 0]);
-          }
-
-          setClicked(!clicked);
+      if (revertOnClick) {
+        if (!clicked) {
+          playSegments(
+            backwards ? [segmentEnd, segmentStart] : [segmentStart, segmentEnd],
+            true
+          );
         }
-      },
-      className,
-    }
-  );
+
+        if (clicked) {
+          playSegments(
+            backwards ? [segmentStart, segmentEnd] : [segmentEnd, segmentStart],
+            true
+          );
+        }
+
+        setClicked((prevClicked) => !prevClicked);
+      }
+    },
+    className,
+  });
 
   setSpeed(speed);
 
