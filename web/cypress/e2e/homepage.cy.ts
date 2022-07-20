@@ -12,6 +12,8 @@ describe("Homepage", () => {
   });
 
   it("should open the user options menu", () => {
+    cy.login();
+
     cy.get('[alt="random avatar image"]').click();
 
     cy.get(":nth-child(1) > a").should("be.visible");
@@ -20,16 +22,17 @@ describe("Homepage", () => {
   });
 
   describe("Habit Checklist", () => {
-    it("should be able to add new habit", () => {
+    it("should be able to add new habit and toggle it", () => {
+      cy.login();
+
       cy.get(".hidden > :nth-child(1) > .btn").click();
       cy.get(".input").type("New Habit");
 
       cy.get(".mb-8 > .btn").click();
 
       cy.contains("New Habit").should("exist");
-    });
 
-    it("should be able to toggle habit", () => {
+      // should be able to toggle habit
       cy.contains("New Habit").click();
       cy.get(".text-success").should("exist");
       cy.get(".text-error").should("not.exist");
@@ -41,10 +44,12 @@ describe("Homepage", () => {
   });
 
   describe("Accomplishments", () => {
-    it("should be able to add new accomplishment", () => {
+    it("should be able to add new accomplishment and return to Accomplishments dashboard when 'Go back' button is clicked", () => {
+      cy.login();
+
       cy.get(".hidden > :nth-child(2) > .btn").click();
 
-      cy.intercept("POST", "http://localhost:3333/rewards", (req) => {
+      cy.intercept("POST", "http://localhost:3000/api/rewards", (req) => {
         const body = req.body;
         expect(body.title).to.equal("New Accomplishment");
         expect(body.body).to.equal("New Accomplishment Description");
@@ -63,9 +68,8 @@ describe("Homepage", () => {
       cy.get(".form-control > .btn").click();
 
       cy.contains(/accomplishment sent successfully/i).should("exist");
-    });
 
-    it("should return to Accomplishments dashboard when 'Go back' button is clicked", () => {
+      // should go back
       cy.contains("button", "Go back").click();
 
       cy.contains("h2", "Accomplishments").should("be.visible");
@@ -78,9 +82,11 @@ describe("Homepage", () => {
 
   describe("Rewards", () => {
     it("should render mocked rewards", () => {
-      cy.intercept("GET", "http://localhost:3333/rewards", {
+      cy.intercept("GET", "http://localhost:3000/api/rewards", {
         fixture: "rewards.json",
       });
+
+      cy.login();
 
       cy.get(".hidden > :nth-child(3) > .btn").click();
 
@@ -90,7 +96,7 @@ describe("Homepage", () => {
     });
 
     it("should show error when content is not appropriate", () => {
-      cy.intercept("POST", "http://localhost:3333/rewards", (req) => {
+      cy.intercept("POST", "http://localhost:3000/api/rewards", (req) => {
         if (req.body.title.includes("bad") || req.body.body.includes("bad")) {
           req.reply((res) =>
             res.send({
@@ -102,6 +108,8 @@ describe("Homepage", () => {
           );
         }
       });
+
+      cy.login();
 
       cy.get(".hidden > :nth-child(2) > .btn").click();
 
@@ -116,6 +124,8 @@ describe("Homepage", () => {
     });
 
     it("should toggle like", () => {
+      cy.login();
+
       cy.get(".hidden > :nth-child(3) > .btn").click();
 
       cy.get(":nth-child(1) > .w-20 > svg").click().wait(2000);

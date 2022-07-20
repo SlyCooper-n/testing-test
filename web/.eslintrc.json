@@ -4,5 +4,8 @@
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended"
   ],
-  "plugins": ["testing-library", "jest-dom"]
+  "plugins": ["testing-library", "jest-dom"],
+  "rules": {
+    "testing-library/await-async-utils": "off"
+  }
 }
