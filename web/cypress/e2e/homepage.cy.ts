@@ -102,7 +102,7 @@ describe("Homepage", () => {
             res.send({
               status: 406,
               body: {
-                msg: "Your content is not appropriate",
+                message: "Your content is not appropriate",
               },
             })
           );
