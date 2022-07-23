@@ -17,8 +17,8 @@
 This project was created to practise some new concepts that I've been studying, like testing... Personaly I didn't think about working on this project so much in terms of style, but when I was finishing the tests I thought it would be interesting to put some nice stuff in there.
 
 There are two folders:
-- web/, which contains the website
-- ~~server/, which contains the server~~ (it was replaced by Next.js API routes)
+- `web/`, which contains the website
+- ~~`server/`, which contains the server~~ (it was replaced by Next.js API routes)
 
 > For more information about my dev journey, consider visiting my [LinkedIn](https://linkedin.com/in/gabriel-vs-frasao).
 
