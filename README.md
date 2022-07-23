@@ -10,7 +10,7 @@
 
 <br />
 
-<img alt="OnlyRooms homepage banner" src="./_docs/banner.jpeg" />
+<img alt="homepage banner" src="./_docs/banner.jpeg" />
 
 ## :pushpin: About
 
@@ -70,3 +70,7 @@ Testing
 - [x] `/rewards` API route
 - [x] Smooth animtions on avatar click
 - [x] Twitter-like like button with Lottie
+
+## :desktop_computer: Deploy
+
+On vercel: not deployed yet
