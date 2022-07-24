@@ -10,7 +10,7 @@
 
 <br />
 
-<img alt="homepage banner" src="./_docs/banner.jpeg" />
+<img alt="homepage short" src="./_docs/app-running.gif" />
 
 ## :pushpin: About
 
