@@ -4,34 +4,39 @@ import Image from "next/image";
 import { Faders, Table, UserCircle } from "phosphor-react";
 import { useState } from "react";
 
-const userOptionsMenuCard: AnimationProps["variants"] = {
-  open: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    scale: 1,
-  },
-  closed: {
-    opacity: 0,
-    x: 60,
-    y: -100,
-    scale: 0,
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.2,
-    },
-  },
-};
-
 export const AvatarPopover = () => {
   const [isVisible, setIsVisible] = useState(false);
 
+  const userOptionsMenuCard: AnimationProps["variants"] = {
+    open: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      scale: 1,
+    },
+    closed: {
+      opacity: 0,
+      x: 60,
+      y: -100,
+      scale: 0,
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+
   return (
     <Popover.Root>
-      <Popover.Trigger>
-        <div onClick={() => setIsVisible(!isVisible)} className="avatar mr-4">
+      <Popover.Trigger
+        onClick={() => {
+          if (isVisible) return;
+          setIsVisible(true);
+        }}
+      >
+        <div className="avatar mr-4">
           <div className="rounded-full">
             <Image
               src="https://placeimg.com/50/50/people"
@@ -46,7 +51,7 @@ export const AvatarPopover = () => {
       <Popover.Content
         forceMount
         sideOffset={20}
-        onInteractOutside={() => setIsVisible(false)}
+        onInteractOutside={(e) => setIsVisible(false)}
       >
         <AnimatePresence>
           {isVisible && (

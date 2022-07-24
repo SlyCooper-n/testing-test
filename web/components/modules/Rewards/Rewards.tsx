@@ -31,9 +31,9 @@ export const Rewards = () => {
             className="my-2 flex justify-between items-center"
           >
             <div>
-              <span className="text-info font-bold">{reward.points}</span>{" "}
+              <strong className="text-info font-bold">{reward.points}</strong>{" "}
               points for &quot;
-              <span className="italic">{reward.title}</span>&quot;
+              <em className="italic">{reward.title}</em>&quot;
             </div>
 
             <Lottie
