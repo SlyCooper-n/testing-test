@@ -74,7 +74,3 @@ Testing
 - [x] `/rewards` API route
 - [x] Smooth animtions on avatar click
 - [x] Twitter-like like button with Lottie
-
-## :desktop_computer: Deploy
-
-On vercel: not deployed yet
